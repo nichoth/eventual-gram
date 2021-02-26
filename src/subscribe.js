@@ -8,6 +8,7 @@ var _ = {
     get: require('lodash/get')
 }
 var after = require('after')
+// var xtend = require('xtend')
 
 function subscribe ({ sbot, state }) {
     var bus = Bus({
@@ -28,6 +29,15 @@ function subscribe ({ sbot, state }) {
     bus.on(evs.profile.get, () => {
         getProfile(function (err, profile) {
             if (err) throw err
+
+            // get the avatarUrl here
+            getUrlForHash(image, (err, imgUrl) => {
+                if (err) throw err
+                acc[id] = { name, image, imgUrl }
+                next(null, acc)
+            })
+
+
             state.me.set(profile)
         })
     })

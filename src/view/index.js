@@ -38,9 +38,6 @@ module.exports = function Eventual ({ state, emit }) {
     // trying this for wonky electron routes
     process.nextTick(() => emit(evs.route.change, '/'))
 
-    emit(evs.profile.get, null)
-    emit(evs.posts.get, null)
-
     var _html = html`<div>
         <p>Hello from JS</p>
         <${Component} emit=${emit} state=${state} />

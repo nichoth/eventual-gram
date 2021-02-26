@@ -27,12 +27,11 @@ function Home (props) {
 
     var { followed, emit } = props
 
-
     useEffect(() => {
         emit(evs.followed.get, null)
-    }, []);
-
-
+        emit(evs.profile.get, null)
+        emit(evs.posts.get, null)
+    }, [])
 
     return html`<div class="route-home">
         <ul class="post-list">

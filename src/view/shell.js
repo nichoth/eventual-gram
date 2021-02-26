@@ -6,6 +6,8 @@ function Shell (props) {
     var { emit } = props
     var { avatarUrl, me } = props
 
+    console.log('props here', props)
+
     return html`<div class="shell">
         <div class="menu">
             <div>
@@ -26,6 +28,8 @@ function Shell (props) {
 
 function AvatarInput (props) {
     var { emit, avatarUrl } = props
+
+    console.log('props', props)
     
     return html`<span class="avatar-holder">
         <label for="avatar-input" id="avatar-label">

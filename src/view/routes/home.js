@@ -23,9 +23,7 @@ class PostText extends Component {
 
 function Home (props) {
     console.log('props in home', props)
-
     var { followed, emit } = props
-
 
     useEffect(() => {
         emit(evs.followed.get, null)

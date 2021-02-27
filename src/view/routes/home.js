@@ -46,7 +46,6 @@ function Home (props) {
                     id: authorId,
                     name: authorId
                 })
-                // var postAvatar = (author.imgUrl || '')
                 var postAvatar = (author.imgUrl ||
                     ('data:image/svg+xml;utf8,' +
                         generateFromString(authorId)

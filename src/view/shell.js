@@ -4,7 +4,8 @@ var evs = require('../EVENTS')
 
 function Shell (props) {
     var { emit } = props
-    var { avatarUrl, me } = props
+    var { me } = props
+    var { avatarUrl } = me
 
     console.log('props here', props)
 

@@ -8,11 +8,15 @@ var _ = {
     get: require('lodash/get')
 }
 var after = require('after')
-// var xtend = require('xtend')
+var xtend = require('xtend')
 
 function subscribe ({ sbot, state }) {
     var bus = Bus({
         memo: true
+    })
+
+    bus.on('*', ev => {
+        console.log('got *', ev)
     })
 
     bus.on(evs.test.foo, ev => {
@@ -22,23 +26,22 @@ function subscribe ({ sbot, state }) {
     })
 
     bus.on(evs.route.change, path => {
-        console.log('subscribed on route', path)
+        console.log('subscribed -- route change', path)
         state.route.set(path)
     })
 
     bus.on(evs.profile.get, () => {
         getProfile(function (err, profile) {
             if (err) throw err
+            console.log('got profile', profile)
+            var { image } = profile
 
             // get the avatarUrl here
             getUrlForHash(image, (err, imgUrl) => {
                 if (err) throw err
-                acc[id] = { name, image, imgUrl }
-                next(null, acc)
+                state.me.set(xtend(profile, { avatarUrl: imgUrl }))
             })
 
-
-            state.me.set(profile)
         })
     })
 

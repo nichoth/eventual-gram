@@ -23,15 +23,17 @@ class PostText extends Component {
 
 function Home (props) {
     console.log('props in home', props)
-    if (!props.posts) return null
 
     var { followed, emit } = props
+
 
     useEffect(() => {
         emit(evs.followed.get, null)
         emit(evs.profile.get, null)
         emit(evs.posts.get, null)
     }, [])
+
+    if (!props.posts) return null
 
     return html`<div class="route-home">
         <ul class="post-list">

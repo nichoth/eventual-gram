@@ -100,7 +100,6 @@ function FollowIcon (props) {
     if (authorId === id) return null
 
     if (isFollowing) {
-        // return html`<div class="follow-icon">*</div>`
         return html`<div class="follow-icon">
             <button title="You are already following this feed"
                 onClick=${ev => ev.preventDefault()}

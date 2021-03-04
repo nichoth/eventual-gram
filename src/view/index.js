@@ -1,5 +1,5 @@
 import { render } from 'preact'
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 var Route = require('route-event')
 var raf = require('raf')
@@ -15,6 +15,10 @@ function Component ({ emit, state }) {
     state(function onChange (newState) {
         raf(() => setState(newState))
     })
+
+    useEffect(() => {
+        emit(evs.profile.get, null)
+    }, [])
 
     var match = router.match(_state.route || '/')
     var route = match ? match.action(match) : null

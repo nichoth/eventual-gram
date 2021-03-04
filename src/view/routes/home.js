@@ -27,7 +27,7 @@ function Home (props) {
 
     useEffect(() => {
         emit(evs.followed.get, null)
-        emit(evs.profile.get, null)
+        // emit(evs.profile.get, null)
         emit(evs.posts.get, null)
     }, [])
 

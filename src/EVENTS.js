@@ -6,7 +6,8 @@ var evs = namespace({
     route: ['change'],
     posts: ['get'],
     followed: ['get'],
-    follow: ['start']
+    follow: ['start'],
+    pub: ['join']
 })
 
 module.exports = evs

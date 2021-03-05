@@ -3,8 +3,7 @@ import { useState } from 'preact/hooks'
 var evs = require('../EVENTS')
 
 function Shell (props) {
-    var { emit } = props
-    var { me } = props
+    var { emit, me, route } = props
     var { avatarUrl } = me
 
     console.log('props here', props)
@@ -16,15 +15,23 @@ function Shell (props) {
                 <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
             </div>
 
-            <a class="home-route" href="/" title="home">home</a>
+            <a class="post-icon home-route ${active(route, '/')}" href="/"
+                title="home">home</a>
 
-            <a class="pubs-route" href="/pubs" title="pubs">pubs</a>
+            <a class="post-icon pubs-route${active(route, '/pubs')}"
+                href="/pubs" title="pubs">pubs</a>
 
-            <a class="new-post-icon" href="/new" title="new">+</a>
+            <a class="post-icon new-post-icon ${active(route, '/new')}"
+                href="/new" title="new">+</a>
         </div>
 
         ${props.children}
     </div>`
+}
+
+function active (route, href) {
+    if (route === href) return 'active'
+    return ''
 }
 
 function AvatarInput (props) {

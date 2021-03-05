@@ -12,3 +12,11 @@
       height: 100%;
   }
 }
+
+.post-icon {
+  text-decoration: none;
+
+  &.active {
+    text-decoration: underline;
+  }
+}

@@ -5,10 +5,6 @@ import { generateFromString } from 'generate-avatar'
 
 function pubsRoute ({ emit, pubs, followed, people }) {
 
-    // @TODO need a 
-    // * list of following
-    // * list of pubs
-
     return html`<div class="pubs-route">
         <form onsubmit=${ev => {
             ev.preventDefault()

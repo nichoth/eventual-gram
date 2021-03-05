@@ -30,8 +30,6 @@ function Shell (props) {
 function AvatarInput (props) {
     var { emit, avatarUrl } = props
 
-    console.log('props', props)
-    
     return html`<span class="avatar-holder">
         <label for="avatar-input" id="avatar-label">
             <img class="avatar" src="${avatarUrl}" title="set avatar" />

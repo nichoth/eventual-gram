@@ -7,7 +7,6 @@ var Router = require('./routes')
 var Shell = require('./shell')
 var evs = require('../EVENTS')
 
-
 function Component ({ emit, state }) {
     var router = Router({ emit, state })
     const [_state, setState] = useState(state())

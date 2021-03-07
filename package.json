@@ -13,7 +13,7 @@
     "pack": "electron-builder --dir",
     "dist": "rm -rf ./dist/* && npm run build && electron-builder",
     "tron": "npm run build && electron .",
-    "copy": "mkdir -p public/server && cp src/server/* public/server",
+    "copy": "npx cross-env mkdir -p public/server && cp src/server/* public/server",
     "build": "npm run build-js && npm run sass",
     "sass": "sass src/style/index.scss public/style.css",
     "build-js": "npm run copy && browserify --debug -p esmify src/index.js > public/bundle.js",

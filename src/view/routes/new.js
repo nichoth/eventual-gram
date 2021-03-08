@@ -63,6 +63,8 @@ function New (props) {
     }
 
     return html`<div class="new-post">
+        <p>Create a new post</p>
+
         <input id="file-input" type="file" accept="image/*"
             onChange=${ev => chooseFile(ev)}
         />

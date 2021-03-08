@@ -18,7 +18,7 @@ function Shell (props) {
             <a class="post-icon home-route ${active(route, '/')}" href="/"
                 title="home">home</a>
 
-            <a class="post-icon pubs-route${active(route, '/pubs')}"
+            <a class="post-icon pubs-route ${active(route, '/pubs')}"
                 href="/pubs" title="pubs">pubs</a>
 
             <a class="post-icon new-post-icon ${active(route, '/new')}"

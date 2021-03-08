@@ -57,7 +57,9 @@ function Home (props) {
                 })
 
                 return html`<li class="post">
-                    <a class="post-link" href="${encodeURIComponent(post.key)}">
+                    <a class="post-link"
+                        href="/post/${encodeURIComponent(post.key)}"
+                    >
                         <img src=${props.postUrls[hash]} />
                     </a>
 

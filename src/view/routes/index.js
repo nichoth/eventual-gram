@@ -9,9 +9,6 @@ var evs = require('../../EVENTS')
 function _Router ({ emit, state }) {
     var router = Router()
     router.addRoute('/', function (match) {
-        // if (!state.posts()) {
-        //     emit(evs.posts.get, null)
-        // }
         return { view: Home }
     })
 
@@ -30,9 +27,10 @@ function _Router ({ emit, state }) {
         return { view: createFeedRoute(userId) }
     })
 
-    // encoded percent sign
     // post route
-    router.addRoute('/%25*', function (match) {
+    // encoded url
+    router.addRoute('/post/%25*', function (match) {
+        console.log('haaaaaaaaa', match)
         var { splats } = match
         // var postId = splats[0]
         console.log('splats', splats)

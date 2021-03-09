@@ -1,5 +1,3 @@
-console.log('hello from src')
-
 var S = require('pull-stream')
 var wsClient = require('pull-ws/client')
 var muxrpc = require('muxrpc')

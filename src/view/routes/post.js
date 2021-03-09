@@ -31,14 +31,12 @@ function createPostView (postId) {
                 </h1>
             </div>
 
-            <div class="post-metadata">
-                ${post.value.content.text ?
-                    html`<div class="post-text">
-                        ${post.value.content.text}
-                    </div>` :
-                    null
-                }
-            </div>
+            ${post.value.content.text ?
+                html`<div class="post-text">
+                    ${post.value.content.text}
+                </div>` :
+                null
+            }
         </div>`
     }
 }

@@ -10,7 +10,6 @@ function createPostView (postId) {
 
         var author = (props.people[post.value.author] || {})
         var authorId = post.value.author
-        // var postAvatar = (author.imgUrl || '')
 
         var postAvatarUrl = (author.imgUrl ||
             ('data:image/svg+xml;utf8,' + generateFromString(authorId))

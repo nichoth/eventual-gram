@@ -28,11 +28,9 @@ function _Router ({ emit, state }) {
     })
 
     // post route
-    // encoded url
+    // encoded percent sign
     router.addRoute('/post/%25*', function (match) {
-        console.log('haaaaaaaaa', match)
         var { splats } = match
-        // var postId = splats[0]
         console.log('splats', splats)
         var postId = '%' + decodeURIComponent(splats[0])
         console.log('***postId***', postId)

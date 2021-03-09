@@ -1,4 +1,5 @@
 import { html } from 'htm/preact'
+import { generateFromString } from 'generate-avatar'
 
 function createPostView (postId) {
     return function PostView (props) {
@@ -9,14 +10,20 @@ function createPostView (postId) {
 
         var author = (props.people[post.value.author] || {})
         var authorId = post.value.author
-        var postAvatar = (author.imgUrl || '')
+        // var postAvatar = (author.imgUrl || '')
+
+        var postAvatarUrl = (author.imgUrl ||
+            ('data:image/svg+xml;utf8,' + generateFromString(authorId))
+        )
+
+        console.log('authorrrrrr', author)
 
         return html`<div class="single-post">
             <img src="${imgUrl}" />
 
             <div class="author">
                 <div class="post-avatar">
-                    <img src="${postAvatar}" />
+                    <img src="${postAvatarUrl}" />
                 </div>
 
                 <h1>

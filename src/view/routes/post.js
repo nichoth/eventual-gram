@@ -16,8 +16,6 @@ function createPostView (postId) {
             ('data:image/svg+xml;utf8,' + generateFromString(authorId))
         )
 
-        console.log('authorrrrrr', author)
-
         return html`<div class="single-post">
             <img src="${imgUrl}" />
 

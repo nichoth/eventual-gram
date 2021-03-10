@@ -90,6 +90,32 @@ function subscribe ({ sbot, state }) {
         })
     })
 
+    bus.on(evs.feed.get, function (feedId) {
+        if (!(state.feeds()[feedId])) {
+            getUserPosts(feedId, function (err, posts) {
+                if (err) throw err
+                var feeds = state.feeds()
+                feeds[feedId] = posts
+                state.feeds.set(feeds)
+            })
+        }
+    })
+
+    bus.on(evs.people.getProfile, function (feedId) {
+        if (state.people()[feedId] && state.people()[feedId].imgUrl) return
+
+        getProfileById(feedId, function (err, person) {
+            if (err) throw err
+            var { name, image } = person
+            getUrlForHash(image, (err, imgUrl) => {
+                if (err) throw err
+                var newOne = {}
+                newOne[feedId] = { name, image, imgUrl }
+                state.people.set(xtend(state.people(), newOne))
+            })
+        })
+    })
+
 
 
 
@@ -190,6 +216,18 @@ function subscribe ({ sbot, state }) {
         )
     }
 
+    function getUserPosts (feedId, cb) {
+        S(
+            sbot.createUserStream({ id: feedId }),
+            S.collect(function (err, msgs) {
+                if (err) throw err
+                var posts = msgs.filter(msg => {
+                    return msg.value.content.type === ts.post
+                })
+                cb(null, posts)
+            })
+        )
+    }
 
     return bus
 }

@@ -7,7 +7,9 @@ var evs = namespace({
     posts: ['get'],
     followed: ['get'],
     follow: ['start'],
-    pub: ['join']
+    pub: ['join'],
+    feed: ['get'],
+    people: ['getProfile']
 })
 
 module.exports = evs

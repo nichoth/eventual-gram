@@ -8,6 +8,7 @@ var state = struct({
     postUrls: observ({}),
     people: observ({}),
     followed: observ([]),
+    feeds: observ({}),
     pubs: struct({
         list: observ([]),
         err: observ(null)

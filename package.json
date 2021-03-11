@@ -1,7 +1,7 @@
 {
   "name": "eventual-gram",
   "productName": "eventual-gram",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Share photos with ssb",
   "main": "public/main.js",
   "scripts": {

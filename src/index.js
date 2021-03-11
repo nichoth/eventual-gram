@@ -4,6 +4,7 @@ var muxrpc = require('muxrpc')
 var manifest = require('./manifest.json')
 var muxrpc = require('muxrpc')
 var view = require('./view')
+var Bus = require('@nichoth/events')
 
 // -------------------------------------
 var subscribe = require('./subscribe')
@@ -35,8 +36,11 @@ function connectSbot ({ onClose }, cb) {
 
 connectSbot({}, function (err, sbot) {
     if (err) throw err
-    var bus = subscribe({ state, sbot })
+    var bus = Bus({
+        memo: true
+    })
     var emit = bus.emit.bind(bus)
-    view({ state, emit })
+    var { setRoute } = view({ state, emit })
+    subscribe({ bus, state, sbot, setRoute })
     console.log('sbooooot', err, sbot)
 })

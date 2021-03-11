@@ -5,6 +5,7 @@ var evs = namespace({
     profile: ['setAvatar', 'save', 'get'],
     route: ['change'],
     posts: ['get'],
+    post: ['new'],
     followed: ['get'],
     follow: ['start'],
     pub: ['join'],

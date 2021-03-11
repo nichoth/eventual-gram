@@ -6,8 +6,6 @@ function Shell (props) {
     var { emit, me, route } = props
     var { avatarUrl } = me
 
-    console.log('props here', props)
-
     return html`<div class="shell">
         <div class="menu">
             <div>

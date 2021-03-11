@@ -1,6 +1,5 @@
 var evs = require("./EVENTS")
 var ts = require('./types')
-var Bus = require('@nichoth/events')
 var getAvatar = require('ssb-avatar')
 var toURL = require('ssb-serve-blobs/id-to-url')
 var S = require('pull-stream')
@@ -9,12 +8,10 @@ var _ = {
 }
 var after = require('after')
 var xtend = require('xtend')
+var createHash = require('multiblob/util').createHash
+var fileReader = require('pull-file-reader')
 
-function subscribe ({ sbot, state }) {
-    var bus = Bus({
-        memo: true
-    })
-
+function subscribe ({ bus, sbot, state, setRoute }) {
     bus.on('*', ev => {
         console.log('got *', ev)
     })
@@ -84,7 +81,6 @@ function subscribe ({ sbot, state }) {
 
     bus.on(evs.followed.get, function () {
         getFollowing(function (err, folls) {
-            console.log('got following', err, folls)
             if (err) throw err
             state.followed.set(folls)
         })
@@ -116,6 +112,17 @@ function subscribe ({ sbot, state }) {
         })
     })
 
+    bus.on(evs.post.new, function ({ image, text }) {
+        newPost({ image, text }, function (err, res) {
+            if (err) throw err
+
+            setRoute('/')
+
+            var posts = (state.posts() || [])
+            posts.unshift(res)
+            state.posts.set(posts)
+        })
+    })
 
 
 
@@ -124,6 +131,34 @@ function subscribe ({ sbot, state }) {
 
 
 
+    function newPost ({ image, text }, cb) {
+        var hasher = createHash('sha256')
+
+        S(
+            fileReader(image),
+            hasher,
+            sbot.blobs.add(function (err, _hash) {
+                // console.log('in blob.add', err, hasher.digest, _hash)
+                // console.log('sbot', sbot)
+                if (err) throw err
+                var hash = '&' + hasher.digest
+                
+                sbot.publish({
+                    type: ts.post,
+                    text: text || '',
+                    mentions: [{
+                        link: hash,        // the hash given by blobs.add
+                    //   name: 'hello.txt', // optional, but recommended
+                    //   size: 12,          // optional, but recommended
+                    //   type: 'text/plain' // optional, but recommended
+                    }]
+                }, function (err, res) {
+                    if (err) return cb(err)
+                    cb.apply(null, arguments)
+                })
+            })
+        )
+    }
 
 
     function getFollowing (cb) {

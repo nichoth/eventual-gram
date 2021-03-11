@@ -28,15 +28,13 @@ function Component ({ emit, state }) {
     return html`<${Shell} emit=${emit} ...${_state}>
         <${routeView} emit=${emit} ...${_state} />
     <//>`
-
-    // <p>foos: ${_state.foo}</p>
-    // <button onClick=${emit(evs.test.foo)}>foo</button>
 }
 
 module.exports = function Eventual ({ state, emit }) {
     var onRoute = Route()
 
     onRoute(path => emit(evs.route.change, path))
+    var { setRoute } = onRoute 
 
     // trying this for wonky electron routes
     process.nextTick(() => emit(evs.route.change, '/'))
@@ -44,4 +42,6 @@ module.exports = function Eventual ({ state, emit }) {
     var _html = html`<${Component} emit=${emit} state=${state} />`
 
     render(_html, document.getElementById('content'))
+
+    return { setRoute }
 }

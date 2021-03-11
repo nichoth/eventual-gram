@@ -16,6 +16,7 @@ var server = fork(require.resolve('./server'), [], {
     //     // NODE_ENV: 'development'
     // }
 })
+
 // require('./server')()
 
 server.on('uncaughtException', function (err) {

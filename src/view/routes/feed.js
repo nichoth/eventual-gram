@@ -8,11 +8,13 @@ function createFeedRoute (feedId) {
     return function Feed (props) {
         var { emit } = props
 
+        // get their profile
         useEffect(() => {
             if (props.people[feedId]) return
             emit(evs.people.getProfile, feedId)
         }, [feedId])
 
+        // get their feed
         useEffect(() => {
             if (props.feeds[feedId]) return
             emit(evs.feed.get, feedId)

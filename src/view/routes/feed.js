@@ -1,5 +1,6 @@
 import { html } from 'htm/preact'
 import { useEffect } from 'preact/hooks';
+import { generateFromString } from 'generate-avatar'
 var evs = require('../../EVENTS')
 
 function createFeedRoute (feedId) {
@@ -8,24 +9,29 @@ function createFeedRoute (feedId) {
         var { emit } = props
 
         useEffect(() => {
-            if (props.feeds[feedId] && props.people[feedId]) return
-            emit(evs.feed.get, feedId)
+            if (props.people[feedId]) return
             emit(evs.people.getProfile, feedId)
+        }, [feedId])
+
+        useEffect(() => {
+            if (props.feeds[feedId]) return
+            emit(evs.feed.get, feedId)
         }, [feedId])
 
         if (!props.feeds[feedId] || !props.people[feedId]) return null
 
         var posts = props.feeds[feedId]
         var person = props.people[feedId]
-        console.log('person', person, person.imgUrl)
-
 
         // i don't know why this is necessary, but it makes the cypress
         // test pass
-        // maybe some kind of raace condition brought out by cypress
+        // maybe some kind of race condition brought out by cypress
         var avatarUrl = person.imgUrl ||
             (feedId === props.me.id ? props.avatarUrl : null)
 
+        // use the default avatar
+        avatarUrl = avatarUrl || ('data:image/svg+xml;utf8,' +
+            generateFromString(feedId))
 
         return html`<div class="feed-route">
             <div class="profile-info">

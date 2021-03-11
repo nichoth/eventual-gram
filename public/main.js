@@ -12,9 +12,9 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 };
 
 var server = fork(require.resolve('./server'), [], {
-    env: {
-        NODE_ENV: 'development'
-    }
+    // env: {
+    //     // NODE_ENV: 'development'
+    // }
 })
 // require('./server')()
 

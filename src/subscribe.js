@@ -12,6 +12,22 @@ var createHash = require('multiblob/util').createHash
 var fileReader = require('pull-file-reader')
 
 function subscribe ({ bus, sbot, state, setRoute }) {
+
+
+
+    // pubs
+    // ------------------------------
+    bus.on(evs.pub.join, function (ev) {
+        console.log('pub join event', ev)
+        sbot.invite.accept(inviteCode, function (err) {
+            if (err) return console.log('errrr', err)
+        })
+    })
+    // ------------------------------
+
+
+
+
     bus.on('*', ev => {
         console.log('got *', ev)
     })
@@ -25,6 +41,40 @@ function subscribe ({ bus, sbot, state, setRoute }) {
     bus.on(evs.route.change, path => {
         console.log('subscribed -- route change', path)
         state.route.set(path)
+
+
+
+
+
+        // should do in the router api
+        if (path === '/pubs') {
+            // get the list of pubs that we know about
+            // and the connection status
+
+            console.log('start peers call')
+            sbot.gossip.peers(function (err, peers) {
+                console.log('peeers in here', err, peers)
+            })
+
+
+            // logs a lot
+            // S(
+            //     sbot.messagesByType({
+            //         type: 'pub'
+            //     }),
+
+            //     S.drain(function (msg) {
+            //         console.log('pub msg', msg)
+            //     }, function done (err) {
+            //         console.log('doneeee', err)
+            //     })
+            // )
+        }
+
+
+
+
+
     })
 
     bus.on(evs.profile.get, () => {

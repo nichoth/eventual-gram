@@ -42,3 +42,11 @@ listen for 'click' events and get the href from the link address
 
 ## some choices
 We're using the same caps & shs as the main ssb network, because that way we can re-use the existing pubs. However, we use a specific 'post type' string in the messages that is only shown by this client.
+
+
+
+--------------------------------------------
+
+
+## how to get a list of pubs?
+How do you get a list of pubs that you know about, and their connection state?

@@ -17,7 +17,7 @@ function _Router ({ emit, state }) {
     })
 
     router.addRoute('/pubs', () => {
-        return { view: Pubs, events: [evs.pub.route] }
+        return { view: Pubs }
     })
 
     // user route
